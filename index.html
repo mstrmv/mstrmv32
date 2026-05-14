@@ -1,1 +1,648 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRILL & FLAME | Премиальный уголь и аксессуары для BBQ</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="cloudflare.com">
+    
+    <style>
+        :root {
+            --bg-black: #0d0d0c;
+            --bg-dark: #161614;
+            --bg-card: #1e1e1b;
+            --primary: #ff4500;
+            --secondary: #ff8c00;
+            --text-light: #f5f5f5;
+            --text-gray: #a0a0a0;
+            --glow: drop-shadow(0 0 15px rgba(255, 69, 0, 0.6));
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-black);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .brand {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Навигация */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(13, 13, 12, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 69, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .brand {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand span {
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--secondary);
+        }
+
+        /* Главный баннер */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.5), var(--bg-black)), 
+                        url('unsplash.com') center/cover no-repeat;
+            padding: 20px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(transparent, var(--bg-black));
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero-content h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .hero-content h1 span {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+        }
+
+        /* Кнопки */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(255, 69, 0, 0.7);
+        }
+
+        .btn-tg {
+            background: #26a5e4;
+            box-shadow: 0 4px 15px rgba(38, 165, 228, 0.4);
+        }
+
+        .btn-tg:hover {
+            box-shadow: 0 6px 25px rgba(38, 165, 228, 0.7);
+        }
+
+        /* Секции */
+        section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            margin: 15px auto 0;
+            box-shadow: 0 0 8px var(--primary);
+        }
+
+        /* Преимущества */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 15fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--bg-dark);
+            padding: 40px 30px;
+            border-radius: 8px;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 69, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .feature-card i {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            filter: var(--glow);
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-gray);
+            font-size: 14px;
+            line-by-line: 1.5;
+        }
+
+        /* Каталог */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.03);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            border-color: rgba(255, 87, 34, 0.2);
+            transform: scale(1.02);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background-color: #2a2a26;
+        }
+
+        .product-info {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .product-desc {
+            color: var(--text-gray);
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .product-price {
+            font-family: 'Oswald', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .btn-sm {
+            padding: 10px 20px;
+            font-size: 12px;
+        }
+
+        /* Галерея */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 6px;
+            height: 250px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1) rotate(1deg);
+            filter: brightness(0.8);
+        }
+
+        /* Контакты */
+        .contacts-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: var(--bg-dark);
+            padding: 60px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 69, 0, 0.1);
+        }
+
+        .contacts-links {
+            display: flex;
+            gap: 40px;
+            margin: 30px 0 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .contact-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .contact-link i {
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        .contact-link:hover {
+            color: var(--secondary);
+        }
+
+        /* Подвал */
+        footer {
+            background: #000;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 14px;
+            color: var(--text-gray);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero-content h1 { font-size: 38px; }
+            .hero-content p { font-size: 15px; }
+            .section-title { font-size: 28px; }
+            .contacts-links { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигационная панель -->
+    <header>
+        <nav class="nav-container">
+            <a href="#" class="brand"><i class="fa-solid to fa-fire-blaze"></i>GRILL<span>FLAME</span></a>
+            <ul class="nav-menu">
+                <li><a href="#features">Преимущества</a></li>
+                <li><a href="#catalog">Каталог</a></li>
+                <li><a href="#gallery">Галерея</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+            <a href="#contacts" class="btn btn-sm" style="box-shadow: none; padding: 8px 16px;">Заказать</a>
+        </nav>
+    </header>
+
+    <!-- Главный баннер -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Премиальный уголь<br>для <span>идеального мяса</span></h1>
+            <p>Жар, который раскрывает истинный вкус. Элитный березовый уголь, профессиональное оборудование и аксессуары для настоящих ценителей культуры BBQ.</p>
+            <a href="#catalog" class="btn"><i class="fa-solid fa-fire"></i> В каталог товаров</a>
+        </div>
+    </section>
+
+    <!-- Блок преимуществ -->
+    <section id="features">
+        <h2 class="section-title">Почему выбирают нас</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fa-solid fa-truck-fast"></i>
+                <h3>Быстрая доставка</h3>
+                <p>Доставим уголь и аксессуары прямо к вашему мангалу в день заказа или в удобное время.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-gem"></i>
+                <h3>Качественный уголь</h3>
+                <p>Крупная фракция без пыли и мелкого мусора. Только отборная древесина твердых пород.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-stopwatch"></i>
+                <h3>Долгое горение</h3>
+                <p>Наш уголь держит стабильный и мощный жар до 4 часов, снижая расход в два раза.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-utensils"></i>
+                <h3>Для профи BBQ</h3>
+                <p>Инструменты и аксессуары, одобренные шеф-поварами лучших мясных ресторанов.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Каталог товаров -->
+    <section id="catalog">
+        <h2 class="section-title">Каталог продукции</h2>
+        <div class="catalog-grid">
+            
+            <!-- Товар 1 -->
+            <div class="product-card">
+                <img src="unsplash.com" alt="Уголь для мангала" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Уголь для мангала</h3>
+                    <p class="product-desc">Классический калиброванный уголь. Идеален для быстрого старта и равномерной прожарки стейков.</p>
+                    <div class="product-meta">
+                        <span class="product-price">450 ₽</span>
+                        <button class="btn btn-sm buy-btn" data-product="Уголь для мангала">Купить</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Товар 2 -->
+            <div class="product-card">
+                <img src="unsplash.com" alt="Древесный уголь ресто" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Древесный уголь Ресто</h3>
+                    <p class="product-desc">Премиальный ресторанный уголь крупной фракции. Долгое горение без дыма и лишнего запаха.</p>
+                    <div class="product-meta">
+                        <span class="product-price">890 ₽</span>
+                        <button class="btn btn-sm buy-btn" data-product="Древесный уголь Ресто">Купить</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Товар 3 -->
+            <div class="product-card">
+                <img src="unsplash.com" alt="Жидкость для розжига" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Эко-розжиг</h3>
+                    <p class="product-desc">Натуральное средство на основе парафинов высокой очистки. Не портит вкус и аромат мяса.</p>
+                    <div class="product-meta">
+                        <span class="product-price">250 ₽</span>
+                        <button class="btn btn-sm buy-btn" data-product="Эко-розжиг">Купить</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Товар 4 -->
+            <div class="product-card">
+                <img src="unsplash.com" alt="Шампуры" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Набор шампуров</h3>
+                    <p class="product-desc">Толстая нержавеющая сталь с деревянной огнеупорной ручкой. Прочные, не гнутся под мясом.</p>
+                    <div class="product-meta">
+                        <span class="product-price">2 900 ₽</span>
+                        <button class="btn btn-sm buy-btn" data-product="Набор шампуров">Купить</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Товар 5 -->
+            <div class="product-card">
+                <img src="unsplash.com" alt="Решетка" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Решетка для мяса</h3>
+                    <p class="product-desc">Профессиональная стальная решетка с антипригарным покрытием. Удобная фиксация порций.</p>
+                    <div class="product-meta">
+                        <span class="product-price">1 650 ₽</span>
+                        <button class="btn btn-sm buy-btn" data-product="Решетка для мяса">Купить</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Товар 6 -->
+            <div class="product-card">
+                <img src="unsplash.com" alt="Перчатки BBQ" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Огнеупорные перчатки</h3>
+                    <p class="product-desc">Тяжелые кожаные краги. Защищают руки от жара до 500°C при работе с открытым огнем.</p>
+                    <div class="product-meta">
+                        <span class="product-price">1 200 ₽</span>
+                        <button class="btn btn-sm buy-btn" data-product="Огнеупорные перчатки">Купить</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Товар 7 -->
+            <div class="product-card">
+                <img src="unsplash.com" alt="Щипцы" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Стальные щипцы</h3>
+                    <p class="product-desc">Длинные эргономичные щипцы из авиационной стали для безопасного переворачивания продуктов.</p>
+                    <div class="product-meta">
+                        <span class="product-price">950 ₽</span>
+                        <button class="btn btn-sm buy-btn" data-product="Стальные щипцы">Купить</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Товар 8 -->
+            <div class="product-card">
+                <img src="unsplash.com" alt="Набор BBQ" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Premium BBQ Набор</h3>
+                    <p class="product-desc">Полный комплект аксессуаров (щипцы, вилка, лопатка, нож, щетка) в жестком кейсе.</p>
+                    <div class="product-meta">
+                        <span class="product-price">6 800 ₽</span>
+                        <button class="btn btn-sm buy-btn" data-product="Premium BBQ Набор">Купить</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Галерея -->
+    <section id="gallery">
+        <h2 class="section-title">Атмосфера BBQ</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="unsplash.com" alt="Мясо на гриле">
+            </div>
+            <div class="gallery-item">
+                <img src="unsplash.com" alt="Пламя огня">
+            </div>
+            <div class="gallery-item">
+                <img src="unsplash.com" alt="Процесс жарки">
+            </div>
+            <div class="gallery-item">
+                <img src="unsplash.com" alt="Сочный стейк">
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты и форма -->
+    <section id="contacts">
+        <h2 class="section-title">Оформить заказ</h2>
+        <div class="contacts-container">
+            <h3>Связаться с шефом пламени</h3>
+            <p style="color: var(--text-gray); margin-top: 10px; max-width: 500px;">Выберите товары в каталоге или напишите нам напрямую для формирования индивидуального заказа.</p>
+            
+            <div class="contacts-links">
+                <a href="tel:+79991234567" class="contact-link"><i class="fa-solid fa-phone"></i> +7 (999) 123-45-67</a>
+                <a href="https://instagram.com" target="_blank" class="contact-link"><i class="fa-brands fa-instagram"></i> @grill_flame</a>
+                <a href="https://t.me" target="_blank" class="contact-link"><i class="fa-brands fa-telegram"></i> Telegram Chat</a>
+            </div>
+
+            <!-- Кнопка заказа в Telegram -->
+            <a href="t.me" id="tg-order-btn" target="_blank" class="btn btn-tg">
+                <i class="fa-brands fa-telegram"></i> Быстрый заказ через Telegram
+            </a>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <p>&copy; 2026 GRILL & FLAME. Все права защищены. Мужской характер, премиальный жар.</p>
+    </footer>
+
+    <!-- Скрипт для интерактивности кнопок -->
+    <script>
+        const buyButtons = document.querySelectorAll('.buy-btn');
+        const tgButton = document.getElementById('tg-order-btn');
+        let orderList = [];
+
+        buyButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const productName = e.target.getAttribute('data-product');
+                
+                // Эффект переключения кнопки
+                if(!e.target.classList.contains('added')) {
+                    e.target.classList.add('added');
+                    e.target.style.background = '#4CAF50';
+                    e.target.innerText = 'В корзине ✓';
+                    orderList.push(productName);
+                } else {
+                    e.target.classList.remove('added');
+                    e.target.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
+                    e.target.innerText = 'Купить';
+                    orderList = orderList.filter(item => item !== productName);
+                }
+
+                // Обновление ссылки Telegram списком товаров
+                if(orderList.length > 0) {
+                    const message = encodeURIComponent(`Привет! Хочу заказать: ${orderList.join(', ')}`);
+                    tgButton.href = `t.me{message}`;
+                    tgButton.innerHTML = `<i class="fa-brands fa-telegram"></i> Оформить (${orderList.length}) в Telegram`;
+                } else {
+                    tgButton.href = `t.me`;
+                    tgButton.innerHTML = `<i class="fa-brands fa-telegram"></i> Быстрый заказ через Telegram`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
 
